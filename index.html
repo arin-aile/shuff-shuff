@@ -8,9 +8,9 @@
 #home{position:fixed;inset:0;background:#fff;color:#111;overflow:hidden;z-index:5}
 .home-top{position:absolute;top:28px;left:36px;right:36px;display:flex;justify-content:space-between;align-items:center;z-index:40;font-size:10px;letter-spacing:1.8px}
 .home-top button{font-size:11px;letter-spacing:1px;padding:12px 16px;border-radius:24px;border:1px solid #e5e5e5;background:#fffffff0}
-.home-stage{position:absolute;left:50%;top:50%;width:1920px;height:976px;transform:translate(-50%,-50%) scale(var(--stage-scale));transform-origin:center;isolation:isolate}
+.home-stage{position:absolute;left:50%;top:50%;width:1920px;height:976px;transform:translate(-50%,-50%) scale(var(--stage-scale));transform-origin:center;isolation:isolate;background:#fff}
 .asso{position:absolute;left:133px;top:119.9775px;margin:0;font:400 541.912px/734.896px CirrusCumulus;white-space:nowrap;color:#000;pointer-events:none}
-.home-card{position:absolute;left:0;top:0;width:263px;height:351px;border-radius:13px;padding:0;opacity:1;will-change:transform;touch-action:none;cursor:grab}
+.home-card{position:absolute;left:0;top:0;width:231.94px;height:309.55px;border-radius:11.46px;padding:0;opacity:1;will-change:transform;touch-action:none;cursor:grab}
 .home-card:focus-visible{outline:4px solid #252525;outline-offset:8px}
 #home{touch-action:none;user-select:none;-webkit-user-select:none}
 .home-bottom{position:absolute;left:24px;right:24px;bottom:29px;z-index:40;display:flex;justify-content:space-between;align-items:end;gap:16px;pointer-events:none}
@@ -59,14 +59,14 @@
 .settings{top:auto;bottom:80px;right:auto;left:24px;z-index:30}
 .dark #ribbon img{filter:invert(1)}
 @media(max-width:650px){.canvas-actions{right:14px;bottom:12px;gap:10px}#play header{left:14px;bottom:12px}.toolbar{bottom:62px;gap:14px}.actions{gap:12px}.settings{bottom:120px}}
-</style>
+#ribbonEdges{position:absolute;inset:0;width:1920px;height:116px;overflow:visible;pointer-events:none}#ribbonEdges line{stroke:currentColor;stroke-width:2.5;stroke-linecap:square}</style>
 <section id="home" aria-label="SHUFF SHUFF 홈">
 <div class="home-top"><button id="homeBrand" aria-label="그리기 화면으로">SHUFF</button><button id="gather" aria-label="처음으로 되돌리기" title="처음으로"><img alt="" src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9IjM5IiBoZWlnaHQ9IjQxLjgyIiB2aWV3Qm94PSIwIDAgMzkgNDEuODIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGlkPSJFbGxpcHNlIDMzIiBkPSJNMiAyMi44MTMxQzIgMzIuMjA1OCA5LjgzNTAyIDM5LjgyIDE5LjUgMzkuODJDMjkuMTY1IDM5LjgyIDM3IDMyLjIwNTggMzcgMjIuODEzMUMzNyAxMy40MjA0IDI5LjE2NSA1LjgwNjA2IDE5LjUgNS44MDYwNk0yNC42OTUzIDEzLjI0NjZMMTkuNSA1LjgwNjA2TDI4LjI1IDEuODIwMDUiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlPSJibGFjayIvPgo8L3N2Zz4K"></button></div>
 <div class="home-stage" id="homeStage">
 <button class="shuff-title" id="enterPlay" aria-label="SHUFF SHUFF — 드로잉 화면으로"><span>SHUFF</span><span>SHUFF</span></button>
 
 </div></section>
-<main id="play" hidden><div id="playStage"><div id="ribbon"><img id="ribbonLeft" alt="" src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9Ijc5Ny43MjIiIGhlaWdodD0iNDIuMTIyOCIgdmlld0JveD0iMCAwIDc5Ny43MjIgNDIuMTIyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikdyb3VwIDM2MzE5Ij4KPHBhdGggaWQ9IkxpbmUgNzciIGQ9Ik03NTguNDg3IDAuOTU4NzA3TDc1NyAwLjc2MjY4OEw3NDguMDYxIDM4LjY1OTZMNzQ5LjU0OCAzOC44NTU2TDc1MS4wMzUgMzkuMDUxN0w3NTkuOTc0IDEuMTU0NzNMNzU4LjQ4NyAwLjk1ODcwN1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDkzIiBkPSJNNzcwLjQ3MiAwLjI2MjU2M0w3NjguOTczIDAuMjk4ODJMNzY2IDM5LjEyMjFMNzY3LjUgMzkuMDg1OUw3NjguOTk5IDM5LjA0OTZMNzcxLjk3MiAwLjIyNjMwNkw3NzAuNDcyIDAuMjYyNTYzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTQiIGQ9Ik03ODMuMzQ3IDAuMTIyNTU1TDc4MS44NTIgMC4yNDUxMDlMNzgxLjEyIDM5LjE3NTJMNzgyLjYxNSAzOS4wNTI2TDc4NC4xMSAzOC45M0w3ODQuODQyIDBMNzgzLjM0NyAwLjEyMjU1NVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDk1IiBkPSJNNzk2LjIyNyAwLjEyMjU1NUw3OTQuNzMyIDAuMjQ1MTA5TDc5NCAzOS4xNzUyTDc5NS40OTUgMzkuMDUyNkw3OTYuOTkgMzguOTNMNzk3LjcyMiAwTDc5Ni4yMjcgMC4xMjI1NTVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA3OCIgZD0iTTc0Ny40NDcgMy4zOTg2OEw3NDYgMy4wMDQ4OEw3MjguMzkzIDM5LjE2NTdMNzI5Ljg0MSAzOS41NTk1TDczMS4yODggMzkuOTUzM0w3NDguODk1IDMuNzkyNDhMNzQ3LjQ0NyAzLjM5ODY4WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgNzkiIGQ9Ik03MjguMzc3IDUuODQyNDNMNzI3IDUuMjQ4MDRMNzAxLjI2MSAzOC41NzRMNzAyLjYzOCAzOS4xNjg0TDcwNC4wMTUgMzkuNzYyOEw3MjkuNzU0IDYuNDM2ODFMNzI4LjM3NyA1Ljg0MjQzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODAiIGQ9Ik03MDEuMjcxIDEwLjUzMDRMNzAwIDkuNzMzMzlMNjY2LjkxIDM5LjIxMkw2NjguMTgxIDQwLjAwOUw2NjkuNDUyIDQwLjgwNjFMNzAyLjU0MSAxMS4zMjc1TDcwMS4yNzEgMTAuNTMwNFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDgxIiBkPSJNNjY2LjAyNSAxNy41NTU3TDY2NSAxNi40NjA5TDYyMi44MzIgMzguNTMzTDYyMy44NTcgMzkuNjI3OEw2MjQuODgyIDQwLjcyMjVMNjY3LjA1MSAxOC42NTA0TDY2Ni4wMjUgMTcuNTU1N1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDgyIiBkPSJNNjIxLjgwOSAyMy43MDMzTDYyMSAyMi40NDA0TDU3NC41NzUgMzkuMDY3NEw1NzUuMzg1IDQwLjMzMDNMNTc2LjE5NCA0MS41OTMyTDYyMi42MTkgMjQuOTY2Mkw2MjEuODA5IDIzLjcwMzNaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4MyIgZD0iTTU3My42MDggMjguMjk4TDU3MyAyNi45MjY4TDUyNC4xMzUgMzkuMDMxNUw1MjQuNzQzIDQwLjQwMjhMNTI1LjM1MSA0MS43NzQxTDU3NC4yMTYgMjkuNjY5M0w1NzMuNjA4IDI4LjI5OFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDg0IiBkPSJNNTIyLjUxOCAyOS44Mjg3TDUyMiAyOC40MjA5TDQ3Mi4zNjQgMzguNjIyMUw0NzIuODgxIDQwLjAyOTlMNDczLjM5OSA0MS40Mzc3TDUyMy4wMzYgMzEuMjM2NUw1MjIuNTE4IDI5LjgyODdaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4NSIgZD0iTTQ3MS40MzkgMzIuMDk4M0w0NzEgMzAuNjY0MUw0MjAuODIxIDM5LjI1NDRMNDIxLjI2IDQwLjY4ODZMNDIxLjcgNDIuMTIyOEw0NzEuODc5IDMzLjUzMjVMNDcxLjQzOSAzMi4wOTgzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODYiIGQ9Ik00MTkuMzg0IDMyLjg2MUw0MTkgMzEuNDExMUwzNjguNTA0IDM4Ljg5MThMMzY4Ljg4OCA0MC4zNDE3TDM2OS4yNzMgNDEuNzkxNkw0MTkuNzY5IDM0LjMxMUw0MTkuMzg0IDMyLjg2MVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDg3IiBkPSJNMzY3LjI2NiAzNS4xMzA0TDM2NyAzMy42NTQzTDMxNS45ODQgMzguODAxM0wzMTYuMjUxIDQwLjI3NzRMMzE2LjUxNyA0MS43NTM2TDM2Ny41MzMgMzYuNjA2NkwzNjcuMjY2IDM1LjEzMDRaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4OCIgZD0iTTMxNC4yNjYgMzUuMTMwNEwzMTQgMzMuNjU0M0wyNjIuOTg0IDM4LjgwMTNMMjYzLjI1MSA0MC4yNzc0TDI2My41MTcgNDEuNzUzNkwzMTQuNTMzIDM2LjYwNjZMMzE0LjI2NiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODkiIGQ9Ik0yNjEuMjY2IDM1LjEzMDRMMjYxIDMzLjY1NDNMMjA5Ljk4NCAzOC44MDEzTDIxMC4yNTEgNDAuMjc3NEwyMTAuNTE3IDQxLjc1MzZMMjYxLjUzMyAzNi42MDY2TDI2MS4yNjYgMzUuMTMwNFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDkwIiBkPSJNMjA4LjI2NyAzNS4xMzA0TDIwOCAzMy42NTQzTDE1Ni45ODQgMzguODAxM0wxNTcuMjUxIDQwLjI3NzRMMTU3LjUxNyA0MS43NTM2TDIwOC41MzMgMzYuNjA2NkwyMDguMjY3IDM1LjEzMDRaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA5MSIgZD0iTTE1NS4yNjYgMzUuMTMwNEwxNTUgMzMuNjU0M0wxMDMuOTg0IDM4LjgwMTNMMTA0LjI1MSA0MC4yNzc0TDEwNC41MTcgNDEuNzUzNkwxNTUuNTMzIDM2LjYwNjZMMTU1LjI2NiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTIiIGQ9Ik0xMDIuMjgyIDM1LjEzMDRMMTAyLjAxNiAzMy42NTQzTDUxIDM4LjgwMTNMNTEuMjY2NSA0MC4yNzc0TDUxLjUzMzEgNDEuNzUzNkwxMDIuNTQ5IDM2LjYwNjZMMTAyLjI4MiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTYiIGQ9Ik01MS4yODIxIDM1LjEzMDRMNTEuMDE1NiAzMy42NTQzTDAgMzguODAxM0wwLjI2NjUxNCA0MC4yNzc0TDAuNTMzMDI4IDQxLjc1MzZMNTEuNTQ4NiAzNi42MDY2TDUxLjI4MjEgMzUuMTMwNFoiIGZpbGw9ImJsYWNrIi8+CjwvZz4KPC9zdmc+Cg=="><img id="ribbonRight" alt="" src="data:image/svg+xml;base64,PHN2ZyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSJub25lIiBvdmVyZmxvdz0idmlzaWJsZSIgc3R5bGU9ImRpc3BsYXk6IGJsb2NrOyIgd2lkdGg9Ijc5Ny43MjIiIGhlaWdodD0iNDIuMTIyOCIgdmlld0JveD0iMCAwIDc5Ny43MjIgNDIuMTIyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9Ikdyb3VwIDM2MzIwIj4KPHBhdGggaWQ9IkxpbmUgNzciIGQ9Ik03NTguNDg3IDAuOTU4NzA3TDc1NyAwLjc2MjY4OEw3NDguMDYxIDM4LjY1OTZMNzQ5LjU0OCAzOC44NTU2TDc1MS4wMzUgMzkuMDUxN0w3NTkuOTc0IDEuMTU0NzNMNzU4LjQ4NyAwLjk1ODcwN1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDkzIiBkPSJNNzcwLjQ3MiAwLjI2MjU2M0w3NjguOTczIDAuMjk4ODJMNzY2IDM5LjEyMjFMNzY3LjUgMzkuMDg1OUw3NjguOTk5IDM5LjA0OTZMNzcxLjk3MiAwLjIyNjMwNkw3NzAuNDcyIDAuMjYyNTYzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTQiIGQ9Ik03ODMuMzQ3IDAuMTIyNTU1TDc4MS44NTIgMC4yNDUxMDlMNzgxLjEyIDM5LjE3NTJMNzgyLjYxNSAzOS4wNTI2TDc4NC4xMSAzOC45M0w3ODQuODQyIDBMNzgzLjM0NyAwLjEyMjU1NVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDk1IiBkPSJNNzk2LjIyNyAwLjEyMjU1NUw3OTQuNzMyIDAuMjQ1MTA5TDc5NCAzOS4xNzUyTDc5NS40OTUgMzkuMDUyNkw3OTYuOTkgMzguOTNMNzk3LjcyMiAwTDc5Ni4yMjcgMC4xMjI1NTVaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA3OCIgZD0iTTc0Ny40NDcgMy4zOTg2OEw3NDYgMy4wMDQ4OEw3MjguMzkzIDM5LjE2NTdMNzI5Ljg0MSAzOS41NTk1TDczMS4yODggMzkuOTUzM0w3NDguODk1IDMuNzkyNDhMNzQ3LjQ0NyAzLjM5ODY4WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgNzkiIGQ9Ik03MjguMzc3IDUuODQyNDNMNzI3IDUuMjQ4MDRMNzAxLjI2MSAzOC41NzRMNzAyLjYzOCAzOS4xNjg0TDcwNC4wMTUgMzkuNzYyOEw3MjkuNzU0IDYuNDM2ODFMNzI4LjM3NyA1Ljg0MjQzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODAiIGQ9Ik03MDEuMjcxIDEwLjUzMDRMNzAwIDkuNzMzMzlMNjY2LjkxIDM5LjIxMkw2NjguMTgxIDQwLjAwOUw2NjkuNDUyIDQwLjgwNjFMNzAyLjU0MSAxMS4zMjc1TDcwMS4yNzEgMTAuNTMwNFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDgxIiBkPSJNNjY2LjAyNSAxNy41NTU3TDY2NSAxNi40NjA5TDYyMi44MzIgMzguNTMzTDYyMy44NTcgMzkuNjI3OEw2MjQuODgyIDQwLjcyMjVMNjY3LjA1MSAxOC42NTA0TDY2Ni4wMjUgMTcuNTU1N1oiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDgyIiBkPSJNNjIxLjgwOSAyMy43MDMzTDYyMSAyMi40NDA0TDU3NC41NzUgMzkuMDY3NEw1NzUuMzg1IDQwLjMzMDNMNTc2LjE5NCA0MS41OTMyTDYyMi42MTkgMjQuOTY2Mkw2MjEuODA5IDIzLjcwMzNaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4MyIgZD0iTTU3My42MDggMjguMjk4TDU3MyAyNi45MjY4TDUyNC4xMzUgMzkuMDMxNUw1MjQuNzQzIDQwLjQwMjhMNTI1LjM1MSA0MS43NzQxTDU3NC4yMTYgMjkuNjY5M0w1NzMuNjA4IDI4LjI5OFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDg0IiBkPSJNNTIyLjUxOCAyOS44Mjg3TDUyMiAyOC40MjA5TDQ3Mi4zNjQgMzguNjIyMUw0NzIuODgxIDQwLjAyOTlMNDczLjM5OSA0MS40Mzc3TDUyMy4wMzYgMzEuMjM2NUw1MjIuNTE4IDI5LjgyODdaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4NSIgZD0iTTQ3MS40MzkgMzIuMDk4M0w0NzEgMzAuNjY0MUw0MjAuODIxIDM5LjI1NDRMNDIxLjI2IDQwLjY4ODZMNDIxLjcgNDIuMTIyOEw0NzEuODc5IDMzLjUzMjVMNDcxLjQzOSAzMi4wOTgzWiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODYiIGQ9Ik00MTkuMzg0IDMyLjg2MUw0MTkgMzEuNDExMUwzNjguNTA0IDM4Ljg5MThMMzY4Ljg4OCA0MC4zNDE3TDM2OS4yNzMgNDEuNzkxNkw0MTkuNzY5IDM0LjMxMUw0MTkuMzg0IDMyLjg2MVoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDg3IiBkPSJNMzY3LjI2NiAzNS4xMzA0TDM2NyAzMy42NTQzTDMxNS45ODQgMzguODAxM0wzMTYuMjUxIDQwLjI3NzRMMzE2LjUxNyA0MS43NTM2TDM2Ny41MzMgMzYuNjA2NkwzNjcuMjY2IDM1LjEzMDRaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA4OCIgZD0iTTMxNC4yNjYgMzUuMTMwNEwzMTQgMzMuNjU0M0wyNjIuOTg0IDM4LjgwMTNMMjYzLjI1MSA0MC4yNzc0TDI2My41MTcgNDEuNzUzNkwzMTQuNTMzIDM2LjYwNjZMMzE0LjI2NiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgODkiIGQ9Ik0yNjEuMjY2IDM1LjEzMDRMMjYxIDMzLjY1NDNMMjA5Ljk4NCAzOC44MDEzTDIxMC4yNTEgNDAuMjc3NEwyMTAuNTE3IDQxLjc1MzZMMjYxLjUzMyAzNi42MDY2TDI2MS4yNjYgMzUuMTMwNFoiIGZpbGw9ImJsYWNrIi8+CjxwYXRoIGlkPSJMaW5lIDkwIiBkPSJNMjA4LjI2NyAzNS4xMzA0TDIwOCAzMy42NTQzTDE1Ni45ODQgMzguODAxM0wxNTcuMjUxIDQwLjI3NzRMMTU3LjUxNyA0MS43NTM2TDIwOC41MzMgMzYuNjA2NkwyMDguMjY3IDM1LjEzMDRaIiBmaWxsPSJibGFjayIvPgo8cGF0aCBpZD0iTGluZSA5MSIgZD0iTTE1NS4yNjYgMzUuMTMwNEwxNTUgMzMuNjU0M0wxMDMuOTg0IDM4LjgwMTNMMTA0LjI1MSA0MC4yNzc0TDEwNC41MTcgNDEuNzUzNkwxNTUuNTMzIDM2LjYwNjZMMTU1LjI2NiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTIiIGQ9Ik0xMDIuMjgyIDM1LjEzMDRMMTAyLjAxNiAzMy42NTQzTDUxIDM4LjgwMTNMNTEuMjY2NSA0MC4yNzc0TDUxLjUzMzEgNDEuNzUzNkwxMDIuNTQ5IDM2LjYwNjZMMTAyLjI4MiAzNS4xMzA0WiIgZmlsbD0iYmxhY2siLz4KPHBhdGggaWQ9IkxpbmUgOTYiIGQ9Ik01MS4yODIxIDM1LjEzMDRMNTEuMDE1NiAzMy42NTQzTDAgMzguODAxM0wwLjI2NjUxNCA0MC4yNzc0TDAuNTMzMDI4IDQxLjc1MzZMNTEuNTQ4NiAzNi42MDY2TDUxLjI4MjEgMzUuMTMwNFoiIGZpbGw9ImJsYWNrIi8+CjwvZz4KPC9zdmc+Cg=="><div id="ribbonHandle" role="slider" tabindex="0" aria-label="SHUFF — 좌우로 드래그" aria-valuemin="420" aria-valuemax="1500" aria-valuenow="960">SHUFF</div></div></div>
+<main id="play" hidden><div id="playStage"><div id="ribbon"><svg id="ribbonEdges" viewBox="0 0 1920 116" aria-hidden="true"></svg><div id="ribbonHandle" role="slider" tabindex="0" aria-label="SHUFF — 좌우로 드래그" aria-valuemin="420" aria-valuemax="1500" aria-valuenow="960">SHUFF</div></div></div>
 <canvas id="paper" aria-label="마우스로 움직이면 사라지는 잔상, 누른 채 그리면 남는 드로잉 캔버스"></canvas>
 <header><div><div class="wordmark">Suit Play<span style="color:#AB96FF">.</span></div><div class="edition">AN INTERACTIVE LITTLE PARTY</div></div><div class="actions"><button class="pill" id="homeReturn">홈</button><button class="pill" id="demo">데모 재생</button><button class="pill export" id="save">PNG 저장 ↗</button><button class="pill" id="tune" aria-expanded="false">조절</button></div></header>
 <div class="intro"><h1>Make a little<br>room for play.</h1><p>가볍게 움직이면, 스르르.<br>누른 채 그리면, 이 순간이 남아요.</p></div>
@@ -186,55 +186,68 @@ function simulateHome(dt){
   for(let i=cards.length-1;i>=0;i--){const c=cards[i];const t=travel?Math.max(0,Math.min(1,((c.x-p.px)*dx+(c.y-p.py)*dy)/(travel*travel))):0;
    const qx=p.px+dx*t,qy=p.py+dy*t,ox=c.x-qx,oy=c.y-qy,rad=c.a*Math.PI/180;
    const lx=Math.cos(rad)*ox+Math.sin(rad)*oy,ly=-Math.sin(rad)*ox+Math.cos(rad)*oy;
-   if(Math.abs(lx)<168&&Math.abs(ly)<212)hits.push({c,ox,oy});
+   if(Math.abs(lx)<132&&Math.abs(ly)<170)hits.push({c,ox,oy});
   }
   // Peel several upper cards at a time rather than launching the entire deck together.
-  for(const {c,ox,oy} of hits.slice(0,6)){
-   c.loose=true;const dist=Math.hypot(ox,oy),fan=c.index*2.399963;
+  if(travel>.4)for(const {c,ox,oy} of hits.slice(0,3)){
+   c.loose=true;
+   const dist=Math.hypot(ox,oy),fan=c.index*2.399963;
    const nx=dist>12?ox/dist:Math.cos(fan),ny=dist>12?oy/dist:Math.sin(fan);
-   const push=reduceHomeMotion?900:7200;
-   c.vx+=(nx*push+(travel?dx/travel*speed*5:0)+Math.cos(fan)*650)*dt;
-   c.vy+=(ny*push+(travel?dy/travel*speed*5:0)+Math.sin(fan)*650)*dt;
-   if(travel>2){const swipe=Math.min(reduceHomeMotion?180:1100,travel*7);c.vx+=(dx/travel*.45+nx*.9+Math.cos(fan)*.65)*swipe;c.vy+=(dy/travel*.45+ny*.9+Math.sin(fan)*.65)*swipe;c.va+=Math.sin(fan)*Math.min(85,travel);}
-   c.va+=((nx*(travel?dy/travel:ny)-ny*(travel?dx/travel:nx))*170+Math.sin(fan)*110)*dt;
+   const strength=reduceHomeMotion?.25:.65;
+   // Hand motion supplies the energy; a resting pointer does not launch cards.
+   const follow=1-Math.exp(-28*dt);
+   c.vx+=(dx/travel*speed*strength+nx*speed*.18-c.vx)*follow;
+   c.vy+=(dy/travel*speed*strength+ny*speed*.18-c.vy)*follow;
+   c.x+=dx*.22;c.y+=dy*.22;
+   c.va+=((nx*dy-ny*dx)*.65-c.va*.12);
+   c.va=Math.max(-65,Math.min(65,c.va));
    markHomeActive();
   }
   p.px=p.x;p.py=p.y;
  }
  // Gentle separation only for released cards; the untouched deck stays stacked.
- if(!regrouping)for(let i=0;i<cards.length;i++)for(let j=i+1;j<cards.length;j++){
+ if(!regrouping&&homePointer&&cards.some(c=>Math.hypot(c.vx,c.vy)>40))for(let i=0;i<cards.length;i++)for(let j=i+1;j<cards.length;j++){
   const a=cards[i],b=cards[j];if(!a.loose||!b.loose)continue;
   let dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy);if(d>=210)continue;
   if(d<1){const angle=(i*17+j)*2.39996;dx=Math.cos(angle);dy=Math.sin(angle);d=1}
-  const force=(1-d/210)*1700*dt,nx=dx/d,ny=dy/d;
+  const force=(1-d/210)*280*dt,nx=dx/d,ny=dy/d;
   a.vx-=nx*force;a.vy-=ny*force;b.vx+=nx*force;b.vy+=ny*force;
  }
  let settled=true;
  for(const c of cards){
   if(regrouping){const blend=1-Math.exp(-9*dt);c.x+=(960.5-c.x)*blend;c.y+=(487.5-c.y)*blend;c.a+=(0-c.a)*blend;if(Math.hypot(c.x-960.5,c.y-487.5)>.2||Math.abs(c.a)>.1)settled=false;}
   else{
-   const cap=reduceHomeMotion?450:2200,mag=Math.hypot(c.vx,c.vy);if(mag>cap){c.vx*=cap/mag;c.vy*=cap/mag}
+   const cap=reduceHomeMotion?300:800,mag=Math.hypot(c.vx,c.vy);if(mag>cap){c.vx*=cap/mag;c.vy*=cap/mag}
    c.x+=c.vx*dt;c.y+=c.vy*dt;c.a+=c.va*dt;
-   const friction=Math.exp(-(reduceHomeMotion?3.5:1.9)*dt);c.vx*=friction;c.vy*=friction;c.va*=Math.exp(-2.8*dt);
+   const friction=Math.exp(-(reduceHomeMotion?12:8)*dt);c.vx*=friction;c.vy*=friction;c.va*=Math.exp(-10*dt);
    // Leave enough of every card on the table to interact with it again.
    if(c.x<60){c.x=60;c.vx=Math.abs(c.vx)*.25}if(c.x>1860){c.x=1860;c.vx=-Math.abs(c.vx)*.25}
    if(c.y<55){c.y=55;c.vy=Math.abs(c.vy)*.25}if(c.y>921){c.y=921;c.vy=-Math.abs(c.vy)*.25}
   }
-  c.el.style.transform=`translate(${c.x-131.5}px,${c.y-175.5}px) rotate(${c.a}deg)`;
+  c.el.style.transform=`translate(${c.x-115.97}px,${c.y-154.775}px) rotate(${c.a}deg)`;
  }
  if(regrouping&&settled){regrouping=false;cards.forEach(c=>{c.x=960.5;c.y=487.5;c.a=0})}
 }
 // The ridge travels with the label; each card edge rises progressively nearby.
 let ribbonCenter=960,ribbonTarget=960,ribbonDrag=null;
 const ribbonHandle=$('ribbonHandle');
+const ribbonEdges=Array.from({length:45},(_,i)=>{const el=document.createElementNS('http://www.w3.org/2000/svg','line');$('ribbonEdges').append(el);return {el,x:80+i*40,angle:0};});
 function drawRibbon(dt){
  ribbonCenter+=(ribbonTarget-ribbonCenter)*(1-Math.exp(-20*dt));ribbonHandle.style.left=ribbonCenter+'px';
  ribbonHandle.setAttribute('aria-valuenow',Math.round(ribbonCenter));
- $('ribbonLeft').style.transform=`scaleX(${(ribbonCenter-85-80)/795})`;
- $('ribbonRight').style.transformOrigin='center';
- $('ribbonRight').style.right='80px';
- $('ribbonRight').style.width=(1840-ribbonCenter-85)+'px';
- $('ribbonRight').style.transform='scaleX(-1)';
+ const half=ribbonHandle.offsetWidth/2+14;
+ const width=160+Math.abs(ribbonCenter-960)*.55;
+ for(const edge of ribbonEdges){
+  const distance=Math.max(0,Math.abs(edge.x-ribbonCenter)-half);
+  const side=edge.x<ribbonCenter?1:-1;
+  const target=side*(5+82*Math.exp(-distance*distance/(2*width*width)))*Math.PI/180;
+  edge.angle+=(target-edge.angle)*(1-Math.exp(-18*dt));
+  const dx=Math.cos(edge.angle)*48,dy=Math.sin(Math.abs(edge.angle))*48;
+  const x1=edge.x-side*dx/2,x2=edge.x+side*dx/2;
+  edge.el.style.visibility=Math.abs(edge.x-ribbonCenter)<half+24?'hidden':'visible';
+  edge.el.setAttribute('x1',x1);edge.el.setAttribute('y1',86);
+  edge.el.setAttribute('x2',x2);edge.el.setAttribute('y2',86-dy);
+ }
 }
 ribbonHandle.onpointerdown=e=>{e.preventDefault();e.stopPropagation();homePointer=null;ribbonDrag={id:e.pointerId,x:e.clientX,center:ribbonTarget};ribbonHandle.setPointerCapture(e.pointerId)};
 ribbonHandle.onpointermove=e=>{e.stopPropagation();if(!ribbonDrag||e.pointerId!==ribbonDrag.id)return;ribbonTarget=Math.max(420,Math.min(1500,ribbonDrag.center+(e.clientX-ribbonDrag.x)/homeScale))};
