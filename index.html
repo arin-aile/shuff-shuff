@@ -174,10 +174,10 @@ $('home').addEventListener('pointermove',e=>{
  const p=homePoint(e);if(homePointer){homePointer.x=p.x;homePointer.y=p.y}else homePointer={...p,px:p.x,py:p.y};
 });
 $('home').addEventListener('pointerdown',e=>{if(e.target.closest('.home-top,#ribbon'))return;const p=homePoint(e);homePointer={...p,px:p.x,py:p.y};});
-$('home').addEventListener('pointerleave',()=>homePointer=null);
+$('home').addEventListener('pointerleave',()=>{homePointer=null;cards.forEach(c=>c.contact=false)});
 $('home').addEventListener('pointercancel',()=>homePointer=null);
 $('home').addEventListener('pointerup',e=>{if(e.pointerType!=='mouse')homePointer=null});
-function gatherCards(){$('enterPlay').style.opacity='0';homePointer=null;regrouping=true;ribbonTarget=960;cards.forEach(c=>{c.vx=c.vy=c.va=0;c.loose=false});}
+function gatherCards(){$('enterPlay').style.opacity='0';homePointer=null;regrouping=true;ribbonTarget=960;cards.forEach(c=>{c.vx=c.vy=c.va=0;c.loose=false;c.contact=false});}
 function simulateHome(dt){
  if(homePointer&&!regrouping){
   const p=homePointer,dx=p.x-p.px,dy=p.y-p.py,travel=Math.hypot(dx,dy),speed=Math.min(1800,travel/dt);
@@ -188,20 +188,21 @@ function simulateHome(dt){
    const lx=Math.cos(rad)*ox+Math.sin(rad)*oy,ly=-Math.sin(rad)*ox+Math.cos(rad)*oy;
    if(Math.abs(lx)<132&&Math.abs(ly)<170)hits.push({c,ox,oy});
   }
-  // Peel several upper cards at a time rather than launching the entire deck together.
-  if(travel>.4)for(const {c,ox,oy} of hits.slice(0,3)){
-   c.loose=true;
-   const dist=Math.hypot(ox,oy),fan=c.index*2.399963;
-   const nx=dist>12?ox/dist:Math.cos(fan),ny=dist>12?oy/dist:Math.sin(fan);
-   const strength=reduceHomeMotion?.25:.65;
-   // Hand motion supplies the energy; a resting pointer does not launch cards.
-   const follow=1-Math.exp(-28*dt);
-   c.vx+=(dx/travel*speed*strength+nx*speed*.18-c.vx)*follow;
-   c.vy+=(dy/travel*speed*strength+ny*speed*.18-c.vy)*follow;
-   c.x+=dx*.22;c.y+=dy*.22;
-   c.va+=((nx*dy-ny*dx)*.65-c.va*.12);
-   c.va=Math.max(-65,Math.min(65,c.va));
-   markHomeActive();
+  // A sweep gives a one-time impulse. Contact must end before a card can be pushed again.
+  const touching=new Set(hits.map(hit=>hit.c));
+  for(const c of cards)if(!touching.has(c))c.contact=false;
+  if(travel>1){
+   const fresh=hits.filter(hit=>!hit.c.contact);
+   for(const hit of hits)hit.c.contact=true;
+   fresh.slice(0,8).forEach(({c,ox,oy},i)=>{
+    c.loose=true;
+    const fan=Math.sin(c.index*2.399963)*.58;
+    const heading=Math.atan2(dy,dx)+fan;
+    const impulse=Math.min(1700,180+speed*.85)*(0.78+.22*Math.cos(i*1.7))*(reduceHomeMotion?.3:1);
+    c.vx+=Math.cos(heading)*impulse;c.vy+=Math.sin(heading)*impulse;
+    c.va=Math.max(-120,Math.min(120,(ox*dy-oy*dx)/Math.max(travel,1)*.8+fan*65));
+    markHomeActive();
+   });
   }
   p.px=p.x;p.py=p.y;
  }
@@ -217,9 +218,9 @@ function simulateHome(dt){
  for(const c of cards){
   if(regrouping){const blend=1-Math.exp(-9*dt);c.x+=(960.5-c.x)*blend;c.y+=(487.5-c.y)*blend;c.a+=(0-c.a)*blend;if(Math.hypot(c.x-960.5,c.y-487.5)>.2||Math.abs(c.a)>.1)settled=false;}
   else{
-   const cap=reduceHomeMotion?300:800,mag=Math.hypot(c.vx,c.vy);if(mag>cap){c.vx*=cap/mag;c.vy*=cap/mag}
+   const cap=reduceHomeMotion?300:1800,mag=Math.hypot(c.vx,c.vy);if(mag>cap){c.vx*=cap/mag;c.vy*=cap/mag}
    c.x+=c.vx*dt;c.y+=c.vy*dt;c.a+=c.va*dt;
-   const friction=Math.exp(-(reduceHomeMotion?12:8)*dt);c.vx*=friction;c.vy*=friction;c.va*=Math.exp(-10*dt);
+   const friction=Math.exp(-(reduceHomeMotion?12:4.2)*dt);c.vx*=friction;c.vy*=friction;c.va*=Math.exp(-6*dt);
    // Leave enough of every card on the table to interact with it again.
    if(c.x<60){c.x=60;c.vx=Math.abs(c.vx)*.25}if(c.x>1860){c.x=1860;c.vx=-Math.abs(c.vx)*.25}
    if(c.y<55){c.y=55;c.vy=Math.abs(c.vy)*.25}if(c.y>921){c.y=921;c.vy=-Math.abs(c.vy)*.25}
@@ -228,25 +229,29 @@ function simulateHome(dt){
  }
  if(regrouping&&settled){regrouping=false;cards.forEach(c=>{c.x=960.5;c.y=487.5;c.a=0})}
 }
-// The ridge travels with the label; each card edge rises progressively nearby.
+// Two permanent banks of 22 card edges: no masks, disappearing edges, or scaled strokes.
 let ribbonCenter=960,ribbonTarget=960,ribbonDrag=null;
 const ribbonHandle=$('ribbonHandle');
-const ribbonEdges=Array.from({length:45},(_,i)=>{const el=document.createElementNS('http://www.w3.org/2000/svg','line');$('ribbonEdges').append(el);return {el,x:80+i*40,angle:0};});
+const ribbonEdges=[-1,1].flatMap(side=>Array.from({length:22},(_,i)=>{
+ const el=document.createElementNS('http://www.w3.org/2000/svg','line');$('ribbonEdges').append(el);
+ return {el,side,i};
+}));
 function drawRibbon(dt){
  ribbonCenter+=(ribbonTarget-ribbonCenter)*(1-Math.exp(-20*dt));ribbonHandle.style.left=ribbonCenter+'px';
  ribbonHandle.setAttribute('aria-valuenow',Math.round(ribbonCenter));
- const half=ribbonHandle.offsetWidth/2+14;
- const width=160+Math.abs(ribbonCenter-960)*.55;
- for(const edge of ribbonEdges){
-  const distance=Math.max(0,Math.abs(edge.x-ribbonCenter)-half);
-  const side=edge.x<ribbonCenter?1:-1;
-  const target=side*(5+82*Math.exp(-distance*distance/(2*width*width)))*Math.PI/180;
-  edge.angle+=(target-edge.angle)*(1-Math.exp(-18*dt));
-  const dx=Math.cos(edge.angle)*48,dy=Math.sin(Math.abs(edge.angle))*48;
-  const x1=edge.x-side*dx/2,x2=edge.x+side*dx/2;
-  edge.el.style.visibility=Math.abs(edge.x-ribbonCenter)<half+24?'hidden':'visible';
-  edge.el.setAttribute('x1',x1);edge.el.setAttribute('y1',86);
-  edge.el.setAttribute('x2',x2);edge.el.setAttribute('y2',86-dy);
+ const half=ribbonHandle.offsetWidth/2+28;
+ const shift=(ribbonCenter-960)/540;
+ for(const {el,side,i} of ribbonEdges){
+  const t=i/21,compression=Math.max(0,side*shift);
+  const phase=Math.max(0,Math.min(1,(compression-t*.72)/.28));
+  const rise=phase*phase*(3-2*phase);
+  const base=5+77*Math.exp(-t*5);
+  const angle=(base*(1-Math.max(0,-side*shift)*.65)+(90-base)*rise)*Math.PI/180;
+  const near=ribbonCenter+side*half,far=side<0?80:1840;
+  const x=near+(far-near)*t;
+  const dx=Math.cos(angle)*48,dy=Math.sin(angle)*48;
+  el.setAttribute('x1',x+side*dx/2);el.setAttribute('y1',86);
+  el.setAttribute('x2',x-side*dx/2);el.setAttribute('y2',86-dy);
  }
 }
 ribbonHandle.onpointerdown=e=>{e.preventDefault();e.stopPropagation();homePointer=null;ribbonDrag={id:e.pointerId,x:e.clientX,center:ribbonTarget};ribbonHandle.setPointerCapture(e.pointerId)};
